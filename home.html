@@ -1,383 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>North Carolina - Talent meets Opportunity</title>
-  <style>
-    :root {
-      color-scheme: light;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      --bg: #f5f7fb;
-      --text: #1f2933;
-      --muted: #637183;
-      --accent: #2463eb;
-      --accent-dark: #1a44a6;
-      --card: #ffffff;
-      --shadow: 0 18px 45px rgba(15, 31, 62, 0.12);
-      --radius: 18px;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      background: linear-gradient(145deg, #102b5d, #15407c, #2463eb);
-      color: #fff;
-      padding: 3.8rem 1.5rem 3.2rem;
-      text-align: center;
-      display: grid;
-      gap: 1.6rem;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: clamp(2.2rem, 3vw + 1.2rem, 3.2rem);
-      letter-spacing: -0.015em;
-    }
-
-    header p {
-      margin: 1rem auto 0;
-      max-width: 60ch;
-      color: #dce7ff;
-    }
-
-    main {
-      flex: 1 1 auto;
-      width: min(900px, 92%);
-      margin: -2.5rem auto 0;
-      display: grid;
-      gap: 3rem;
-    }
-
-    .headline-stats {
-      display: grid;
-      gap: 1.8rem;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
-
-    .headline-stats.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .stat-card {
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 24px;
-      padding: 1.8rem 2rem;
-      box-shadow: 0 18px 40px rgba(10, 27, 58, 0.16);
-      border: 1px solid rgba(16, 43, 93, 0.06);
-      display: grid;
-      gap: 1.2rem;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-card__media {
-      height: 120px;
-      width: 120px;
-      border-radius: 50%;
-      background: rgba(36, 99, 235, 0.12);
-      border: 2px dashed rgba(36, 99, 235, 0.35);
-      color: rgba(36, 99, 235, 0.75);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-size: 0.75rem;
-      margin: 0 auto;
-    }
-
-    .stat-card__body {
-      display: grid;
-      gap: 0.6rem;
-      color: #1a2740;
-    }
-
-    .stat-card__eyebrow {
-      margin: 0;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(36, 99, 235, 0.8);
-      text-align: center;
-    }
-
-    .stat-card__stat {
-      margin: 0;
-      font-size: clamp(2.4rem, 3.6vw + 1rem, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      text-align: center;
-      color: #10224a;
-    }
-
-    .stat-card__detail {
-      margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: rgba(26, 39, 64, 0.82);
-      text-align: center;
-    }
-
-    .stat-card__source {
-      margin: 0;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: rgba(36, 99, 235, 0.6);
-      text-align: center;
-    }
-
-    .search-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 2.2rem 2.4rem;
-      display: grid;
-      gap: 1.4rem;
-    }
-
-    .search-card h2 {
-      margin: 0;
-      font-size: clamp(1.5rem, 1.4vw + 1rem, 2rem);
-    }
-
-    .search-form {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .search-fields {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    @media (min-width: 640px) {
-      .search-fields {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.85rem;
-        align-items: center;
-      }
-    }
-    /* NEW: on wider screens, line up all three fields in one row */
-    @media (min-width: 900px) {
-      .search-fields {
-        grid-template-columns: 1.2fr 1fr 1fr;
-      }
-    }
-
-    .search-fields input {
-      border: 1px solid rgba(31, 41, 51, 0.1);
-      border-radius: 999px;
-      padding: 0.85rem 1.1rem;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    .search-fields select {
-      border: 1px solid rgba(31, 41, 51, 0.12);
-      border-radius: 999px;
-      padding: 0.85rem 1.1rem;
-      font-size: 1rem;
-      width: 100%;
-      background: #fff;
-    }
-
-    .search-form button {
-      justify-self: flex-start;
-      border: none;
-      border-radius: 999px;
-      padding: 0.85rem 1.8rem;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .search-form button:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    footer {
-      padding: 2rem 0 2.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-  </style>
+  <meta name="description" content="Explore curated job titles across North Carolina cities with the NC Careers Hub." />
+  <title>North Carolina Careers Hub</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
-<body>
-  <header>
-    <h1>North Carolina - Talent meets Opportunity</h1>
-    <p>Your one shop stop to explore jobs across the Tar Heel State. Choose a city and select a skill (as needed) to see your next opportunity.</p>
+<body class="landing-page">
+  <header class="hero" id="top">
+    <div class="hero__content">
+      <p class="hero__eyebrow">North Carolina Careers Hub</p>
+      <h1>Talent Meets Opportunity Across the Tar Heel State</h1>
+      <p class="hero__lede">Discover curated job titles aggregated from LinkedIn, Indeed, Adzuna, and NCWorks. Use the explorer below to find openings matched to your city and skillset.</p>
+      <div class="hero__actions">
+        <a class="button" href="#city-explorer">Explore cities</a>
+        <a class="button button--ghost" href="#insights">View statewide insights</a>
+      </div>
+      <dl class="hero__stats">
+        <div class="hero__stat">
+          <dt>Job openings</dt>
+          <dd>257K</dd>
+          <span>Open roles statewide (Jul&nbsp;2025)</span>
+        </div>
+        <div class="hero__stat">
+          <dt>Payroll jobs</dt>
+          <dd>5.1M</dd>
+          <span>Non-farm payroll positions (Oct&nbsp;2025)</span>
+        </div>
+        <div class="hero__stat">
+          <dt>Growth</dt>
+          <dd>+1.6%</dd>
+          <span>Year-over-year job growth</span>
+        </div>
+      </dl>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero-card">
+        <h3>Industries Adding Jobs</h3>
+        <ul>
+          <li>Education &amp; Health Services &mdash; <strong>+3.0%</strong></li>
+          <li>Professional &amp; Business Services &mdash; <strong>+2.9%</strong></li>
+          <li>Construction &mdash; <strong>+2.9%</strong></li>
+          <li>Leisure &amp; Hospitality &mdash; <strong>+1.9%</strong></li>
+        </ul>
+      </div>
+      <div class="hero-card">
+        <p><strong>0.76</strong> unemployed North Carolinians per opening keeps talent in high demand statewide.</p>
+        <p>Use the filters below to jump straight into titles tailored for each community.</p>
+      </div>
+    </div>
   </header>
-  <main>
-    <section class="search-card">
-      <h2>Search openings by city</h2>
-      <form class="search-form" id="city-form">
-        <div class="search-fields">
-          <label class="visually-hidden" for="city-search">Filter cities</label>
-          <input id="city-search" type="search" placeholder="Start typing a city..." autocomplete="off" />
-
-          <!-- NEW: optional keyword/skill search -->
-          <label class="visually-hidden" for="keyword-search">Keyword or skill (optional)</label>
-          <input id="keyword-search" type="search" placeholder="Keyword or skill (optional)" autocomplete="off" />
-
-          <label class="visually-hidden" for="city-select">Choose a city</label>
-          <select id="city-select" required>
-            <option value="" disabled selected>Select a city</option>
-            <option value="dist/apex-nc/index.html">Apex, NC</option>
-            <option value="dist/asheville-nc/index.html">Asheville, NC</option>
-            <option value="dist/burlington-nc/index.html">Burlington, NC</option>
-            <option value="dist/cary-nc/index.html">Cary, NC</option>
-            <option value="dist/chapel-hill-nc/index.html">Chapel Hill, NC</option>
-            <option value="dist/charlotte-nc/index.html">Charlotte, NC</option>
-            <option value="dist/durham-nc/index.html">Durham, NC</option>
-            <option value="dist/fayetteville-nc/index.html">Fayetteville, NC</option>
-            <option value="dist/gastonia-nc/index.html">Gastonia, NC</option>
-            <option value="dist/greensboro-nc/index.html">Greensboro, NC</option>
-            <option value="dist/greensville-nc/index.html">Greensville, NC</option>
-            <option value="dist/high-point-nc/index.html">High Point, NC</option>
-            <option value="dist/huntersville-nc/index.html">Huntersville, NC</option>
-            <option value="dist/jacksonville-nc/index.html">Jacksonville, NC</option>
-            <option value="dist/kannapolis-nc/index.html">Kannapolis, NC</option>
-            <option value="dist/mooresville-nc/index.html">Mooresville, NC</option>
-            <option value="dist/raleigh-nc/index.html">Raleigh, NC</option>
-            <option value="dist/wake-forest-nc/index.html">Wake Forest, NC</option>
-            <option value="dist/wilmington-nc/index.html">Wilmington, NC</option>
-            <option value="dist/winston-salem-nc/index.html">Winston Salem, NC</option>
-          </select>
-        </div>
-        <button type="submit">View city insights</button>
-      </form>
+  <main class="landing-main">
+    <section class="insight-grid" id="insights" aria-labelledby="insights-title">
+      <h2 id="insights-title">Why North Carolina?</h2>
+      <div class="insight-grid__cards">
+        <article class="insight-card">
+          <h3>Curated Listings</h3>
+          <p>Aggregated titles from LinkedIn, Indeed, Adzuna, and NCWorks surface both statewide openings and local niche roles in seconds.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Regional Depth</h3>
+          <p>From banking and fintech in Charlotte to life sciences in the Triangle, every metro offers distinct industry strengths to explore.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Data to decide</h3>
+          <p><strong>5.1M</strong> payroll jobs and <strong>257K</strong> openings show a labor market outpacing the national average in 2025.</p>
+        </article>
+      </div>
     </section>
-    <section class="headline-stats reveal-on-scroll" id="headline-stats">
-      <article class="stat-card">
-        <div class="stat-card__body">
-          <p class="stat-card__eyebrow">Curated full time and part time job listings from LinkedIn, Indeed, Adzuna, and NCWorks.</p>
-          <p class="stat-card__stat">5.095 M</p>
-          <p class="stat-card__detail"><strong>5.095 M</strong> non-farm payroll jobs statewide in October 2025 &bull; <strong>+1.6%</strong> year over year</p>
-          
+
+    <section class="city-explorer" id="city-explorer" aria-labelledby="city-explorer-title">
+      <div class="city-explorer__intro">
+        <h2 id="city-explorer-title">Explore Cities &amp; Job Titles</h2>
+        <p>Search across 20 North Carolina communities, filter by region, and pass an optional keyword to refine job title results.</p>
+      </div>
+      <form class="city-search" data-city-form role="search">
+        <div class="city-search__fields">
+          <div class="field">
+            <label for="city-search-input">Search cities</label>
+            <input id="city-search-input" data-city-search type="search" placeholder="Search by city or industry focus..." autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="keyword-search">Keyword or skill (optional)</label>
+            <input id="keyword-search" data-keyword-input type="search" placeholder="Keyword (e.g., nursing, Python, HVAC)" autocomplete="off" />
+          </div>
+          <div class="field city-search__reset">
+            <button type="reset" class="button button--subtle button--small">Clear filters</button>
+          </div>
         </div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-card__body">
-          <p class="stat-card__eyebrow">Industries Adding Jobs</p>
-          <p class="stat-card__detail"><strong>Education &amp; Health +3.0%</strong> &bull; <strong>Professional &amp; Business Services +2.9%</strong> &bull; <strong>Construction +2.9%</strong> &bull; <strong>Other Services +2.8%</strong> &bull; <strong>Leisure &amp; Hospitality +1.9%</strong> &bull; <strong>Financial Activities +1.2%</strong> &bull; <strong>Trade / Transportation / Utilities +1.0%</strong> &bull; <strong>Government +1.4%</strong></p>
-          
-        </div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-card__body">
-          <p class="stat-card__eyebrow">Demand Snapshot</p>
-          <p class="stat-card__stat">257K openings</p>
-          <p class="stat-card__detail">Open positions in Jul 2025 &bull; <strong>4.8%</strong> openings rate (vs. 4.3% U.S.) &bull; ~<strong>0.76</strong> unemployed per opening</p>
-          <p class="stat-card__source">Source: Bureau of Labor Statistics</p>
-        </div>
-      </article>
+      </form>
+      <div class="filter-chips" role="group" aria-label="Filter by region">
+        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All regions</button>
+        <button type="button" class="chip" data-filter="triangle" aria-pressed="false">Research Triangle</button>
+        <button type="button" class="chip" data-filter="charlotte" aria-pressed="false">Charlotte Metro</button>
+        <button type="button" class="chip" data-filter="triad" aria-pressed="false">Piedmont Triad</button>
+        <button type="button" class="chip" data-filter="coastal" aria-pressed="false">Coastal &amp; Eastern</button>
+        <button type="button" class="chip" data-filter="mountain" aria-pressed="false">Mountains</button>
+        <button type="button" class="chip" data-filter="suburban" aria-pressed="false">Growing Suburbs</button>
+      </div>
+      <p class="city-count"><strong><span data-city-count>0</span></strong> of <span data-city-total>0</span> cities match your filters.</p>
+      <div class="city-grid" data-city-grid>
+        <article class="city-card" data-city-card data-groups="charlotte" data-search="charlotte north carolina finance fintech energy advanced manufacturing queen city">
+          <span class="city-card__region">Charlotte Metro</span>
+          <h3>Charlotte, NC</h3>
+          <p class="city-card__summary">Financial capital with fintech, energy, and advanced manufacturing employers anchored in Uptown and South End.</p>
+          <div class="city-card__tags"><span>Finance</span><span>Fintech</span><span>Advanced Manufacturing</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./charlotte-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triangle" data-search="raleigh north carolina capital software life sciences government research triangle">
+          <span class="city-card__region">Research Triangle</span>
+          <h3>Raleigh, NC</h3>
+          <p class="city-card__summary">State capital with momentum in software development, life sciences, and civic technology across downtown and North Hills.</p>
+          <div class="city-card__tags"><span>Software</span><span>Life Sciences</span><span>Government</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./raleigh-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triangle" data-search="durham north carolina biotech research startups research triangle park">
+          <span class="city-card__region">Research Triangle</span>
+          <h3>Durham, NC</h3>
+          <p class="city-card__summary">Research Triangle Park anchors biotech, advanced analytics, and startup growth surrounding Duke University.</p>
+          <div class="city-card__tags"><span>Biotech</span><span>Analytics</span><span>Startups</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./durham-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triad" data-search="greensboro north carolina logistics aviation manufacturing piedmont triad">
+          <span class="city-card__region">Piedmont Triad</span>
+          <h3>Greensboro, NC</h3>
+          <p class="city-card__summary">Aviation, logistics, and advanced manufacturing opportunities fueled by the Piedmont Triad International Airport expansion.</p>
+          <div class="city-card__tags"><span>Aviation</span><span>Logistics</span><span>Manufacturing</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./greensboro-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triad" data-search="winston-salem north carolina innovation quarter healthcare manufacturing piedmont">
+          <span class="city-card__region">Piedmont Triad</span>
+          <h3>Winston-Salem, NC</h3>
+          <p class="city-card__summary">Innovation Quarter drives healthcare, biotech, and advanced manufacturing hiring along the I-40 corridor.</p>
+          <div class="city-card__tags"><span>Healthcare</span><span>Biotech</span><span>Advanced Manufacturing</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./winston-salem-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="coastal" data-search="wilmington north carolina film logistics coastal biotechnology tourism">
+          <span class="city-card__region">Coastal &amp; Eastern</span>
+          <h3>Wilmington, NC</h3>
+          <p class="city-card__summary">Port city blending film, biotechnology, logistics, and tourism roles along the Cape Fear coast.</p>
+          <div class="city-card__tags"><span>Port &amp; Logistics</span><span>Biotech</span><span>Hospitality</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./wilmington-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triangle suburban" data-search="cary north carolina research triangle tech project management quality of life">
+          <span class="city-card__region">Research Triangle</span>
+          <h3>Cary, NC</h3>
+          <p class="city-card__summary">High quality of life suburb with enterprise software, project management, and clean tech roles.</p>
+          <div class="city-card__tags"><span>Software</span><span>Project Management</span><span>Clean Tech</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./cary-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="coastal" data-search="jacksonville north carolina camp lejeune defense logistics coastal">
+          <span class="city-card__region">Coastal &amp; Eastern</span>
+          <h3>Jacksonville, NC</h3>
+          <p class="city-card__summary">Home to Camp Lejeune with strong defense contracting, healthcare, and logistics hiring.</p>
+          <div class="city-card__tags"><span>Defense</span><span>Healthcare</span><span>Logistics</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./jacksonville-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triangle suburban" data-search="chapel hill north carolina unc life sciences education research triangle">
+          <span class="city-card__region">Research Triangle</span>
+          <h3>Chapel Hill, NC</h3>
+          <p class="city-card__summary">UNC and local startups create demand for life sciences, clinical research, and higher education professionals.</p>
+          <div class="city-card__tags"><span>Life Sciences</span><span>Clinical Research</span><span>Education</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./chapel-hill-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="charlotte suburban" data-search="huntersville north carolina lake norman logistics retail healthcare charlotte suburb">
+          <span class="city-card__region">Charlotte Metro</span>
+          <h3>Huntersville, NC</h3>
+          <p class="city-card__summary">Lakeside suburb supporting Charlotte growth with logistics, retail leadership, and healthcare openings.</p>
+          <div class="city-card__tags"><span>Logistics</span><span>Retail</span><span>Healthcare</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./huntersville-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triad" data-search="high point north carolina furniture design logistics piedmont triad">
+          <span class="city-card__region">Piedmont Triad</span>
+          <h3>High Point, NC</h3>
+          <p class="city-card__summary">Furniture capital evolving into logistics, advanced manufacturing, and design-driven roles.</p>
+          <div class="city-card__tags"><span>Manufacturing</span><span>Logistics</span><span>Design</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./high-point-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triangle suburban" data-search="apex north carolina research triangle tech startups suburb quality of life">
+          <span class="city-card__region">Research Triangle</span>
+          <h3>Apex, NC</h3>
+          <p class="city-card__summary">Fast-growing suburb with software, engineering, and small business leadership roles tied to the Triangle.</p>
+          <div class="city-card__tags"><span>Software</span><span>Engineering</span><span>Small Business</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./apex-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="coastal" data-search="fayetteville north carolina fort liberty defense aerospace healthcare">
+          <span class="city-card__region">Coastal &amp; Eastern</span>
+          <h3>Fayetteville, NC</h3>
+          <p class="city-card__summary">Fort Liberty drives defense, aerospace maintenance, and healthcare hiring across the Sandhills.</p>
+          <div class="city-card__tags"><span>Defense</span><span>Aerospace</span><span>Healthcare</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./fayetteville-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="charlotte suburban" data-search="gastonia north carolina manufacturing textiles logistics charlotte">
+          <span class="city-card__region">Charlotte Metro</span>
+          <h3>Gastonia, NC</h3>
+          <p class="city-card__summary">Textiles-turned-advanced manufacturing hub serving Charlotte with skilled trades and logistics roles.</p>
+          <div class="city-card__tags"><span>Manufacturing</span><span>Skilled Trades</span><span>Logistics</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./gastonia-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="mountain" data-search="asheville north carolina mountain outdoor hospitality healthcare advanced manufacturing">
+          <span class="city-card__region">Mountains</span>
+          <h3>Asheville, NC</h3>
+          <p class="city-card__summary">Mountain city pairing outdoor tourism with healthcare, climate tech, and advanced manufacturing employers.</p>
+          <div class="city-card__tags"><span>Hospitality</span><span>Healthcare</span><span>Climate Tech</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./asheville-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triad suburban" data-search="burlington north carolina manufacturing biopharma logistics piedmont">
+          <span class="city-card__region">Piedmont Triad</span>
+          <h3>Burlington, NC</h3>
+          <p class="city-card__summary">Biopharma, textiles, and logistics employers connect Burlington to the broader Triad market.</p>
+          <div class="city-card__tags"><span>Biopharma</span><span>Logistics</span><span>Manufacturing</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./burlington-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="charlotte suburban" data-search="mooresville north carolina motorsports advanced manufacturing lake norman">
+          <span class="city-card__region">Charlotte Metro</span>
+          <h3>Mooresville, NC</h3>
+          <p class="city-card__summary">Race City USA mixes motorsports engineering with corporate headquarters and advanced manufacturing roles.</p>
+          <div class="city-card__tags"><span>Motorsports</span><span>Engineering</span><span>Corporate</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./mooresville-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="charlotte suburban" data-search="kannapolis north carolina nc research campus life sciences manufacturing nutrition">
+          <span class="city-card__region">Charlotte Metro</span>
+          <h3>Kannapolis, NC</h3>
+          <p class="city-card__summary">NC Research Campus fuels life sciences, nutrition research, and light manufacturing opportunities.</p>
+          <div class="city-card__tags"><span>Life Sciences</span><span>Nutrition</span><span>Manufacturing</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./kannapolis-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="triangle suburban" data-search="wake forest north carolina research triangle entrepreneurship education">
+          <span class="city-card__region">Research Triangle</span>
+          <h3>Wake Forest, NC</h3>
+          <p class="city-card__summary">Historic downtown revival enabling entrepreneurship, education, and remote work hubs north of Raleigh.</p>
+          <div class="city-card__tags"><span>Entrepreneurship</span><span>Education</span><span>Remote Work</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./wake-forest-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+        <article class="city-card" data-city-card data-groups="coastal" data-search="greensboro greenville greensville north carolina east carolina university healthcare logistics advanced manufacturing">
+          <span class="city-card__region">Coastal &amp; Eastern</span>
+          <h3>Greenville, NC</h3>
+          <p class="city-card__summary">East Carolina University anchors healthcare, advanced manufacturing, and logistics across Eastern North Carolina.</p>
+          <div class="city-card__tags"><span>Healthcare</span><span>Manufacturing</span><span>Logistics</span></div>
+          <div class="city-card__actions"><a class="button button--small" href="./greensville-nc/index.html" data-city-link>View job titles</a></div>
+        </article>
+      </div>
+      <p class="city-empty" data-empty-state hidden>No cities match your filters. Try adjusting the search or region.</p>
     </section>
   </main>
   <footer>
-    &copy; 2025 North Carolina Careers Hub. Buzzing with opportunity.
+    &copy; 2025 North Carolina Careers Hub. Buzzing with opportunity statewide.
   </footer>
 
-  <style>
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
   <script>
-    const searchInput = document.getElementById('city-search');
-    const keywordInput = document.getElementById('keyword-search'); // NEW
-    const citySelect = document.getElementById('city-select');
-    const form = document.getElementById('city-form');
-    const statsSection = document.getElementById('headline-stats');
+    (function () {
+      const cards = Array.from(document.querySelectorAll('[data-city-card]'));
+      if (!cards.length) return;
 
-    if (searchInput && citySelect) {
-      searchInput.addEventListener('input', () => {
-        const term = searchInput.value.trim().toLowerCase();
-        let firstVisible = null;
-        Array.from(citySelect.options).forEach(option => {
-          if (!option.value) return;
-          const match = option.text.toLowerCase().includes(term);
-          option.hidden = !match;
-          if (match && !firstVisible) {
-            firstVisible = option;
-          }
+      const searchInput = document.querySelector('[data-city-search]');
+      const keywordInput = document.querySelector('[data-keyword-input]');
+      const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+      const grid = document.querySelector('[data-city-grid]');
+      const countEl = document.querySelector('[data-city-count]');
+      const totalEl = document.querySelector('[data-city-total]');
+      const emptyState = document.querySelector('[data-empty-state]');
+      const form = document.querySelector('[data-city-form]');
+      let activeFilter = 'all';
+      const total = cards.length;
+
+      if (totalEl) {
+        totalEl.textContent = total.toString();
+      }
+
+      function applyFilters() {
+        const query = (searchInput && searchInput.value.trim().toLowerCase()) || '';
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const searchData = card.dataset.search || '';
+          const groups = card.dataset.groups || '';
+          const matchesFilter = activeFilter === 'all' || groups.split(' ').includes(activeFilter);
+          const matchesQuery = !query || searchData.includes(query);
+          const isVisible = matchesFilter && matchesQuery;
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
         });
-        if (firstVisible) {
-          citySelect.value = firstVisible.value;
-        } else {
-          citySelect.value = '';
+
+        if (countEl) {
+          countEl.textContent = visibleCount.toString();
         }
-      });
-    }
 
-    if (form && citySelect) {
-      form.addEventListener('submit', event => {
-        event.preventDefault();
-        let destination = citySelect.value;
-        if (!destination) return;
-
-        const keyword = keywordInput ? keywordInput.value.trim() : '';
-        if (keyword) {
-          const sep = destination.includes('?') ? '&' : '?';
-          destination = destination + sep + 'q=' + encodeURIComponent(keyword);
+        if (emptyState) {
+          emptyState.hidden = visibleCount !== 0;
         }
-        window.location.href = destination;
-      });
-    }
+      }
 
-    if (statsSection && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            statsSection.classList.add('is-visible');
-            obs.unobserve(entry.target);
-          }
+      if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const targetFilter = button.dataset.filter || 'all';
+          if (targetFilter === activeFilter) return;
+
+          activeFilter = targetFilter;
+          filterButtons.forEach((btn) => {
+            const isActive = btn.dataset.filter === activeFilter;
+            btn.classList.toggle('is-active', isActive);
+            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+
+          applyFilters();
         });
-      }, { threshold: 0.2 });
-      observer.observe(statsSection);
-    } else if (statsSection) {
-      const onScroll = () => {
-        const rect = statsSection.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.8) {
-          statsSection.classList.add('is-visible');
-          window.removeEventListener('scroll', onScroll);
-        }
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }
+      });
+
+      if (form) {
+        form.addEventListener('reset', () => {
+          activeFilter = 'all';
+          window.requestAnimationFrame(() => {
+            filterButtons.forEach((btn) => {
+              const isActive = btn.dataset.filter === 'all';
+              btn.classList.toggle('is-active', isActive);
+              btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+            applyFilters();
+          });
+        });
+      }
+
+      if (grid && keywordInput) {
+        grid.addEventListener('click', (event) => {
+          const link = event.target.closest('[data-city-link]');
+          if (!link) return;
+
+          const keyword = keywordInput.value.trim();
+          if (!keyword) return;
+
+          event.preventDefault();
+          const url = link.getAttribute('href') || '';
+          const separator = url.includes('?') ? '&' : '?';
+          window.location.href = url + separator + 'q=' + encodeURIComponent(keyword);
+        });
+      }
+
+      applyFilters();
+    })();
   </script>
 </body>
 </html>
