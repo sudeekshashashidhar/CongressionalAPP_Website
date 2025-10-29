@@ -4,203 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>North Carolina Careers Hub — Generated Titles</title>
-  <style>
-    :root {
-      color-scheme: light;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      --bg: #f5f7fb;
-      --text: #1f2933;
-      --muted: #637183;
-      --accent: #2463eb;
-      --card: #ffffff;
-      --shadow: 0 18px 45px rgba(15, 31, 62, 0.12);
-      --radius: 16px;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      padding: 3.2rem 1.5rem 2.6rem;
-      background: linear-gradient(145deg, #102b5d, #15407c, #2463eb);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.1rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: clamp(2.6rem, 3.8vw + 1.2rem, 4rem);
-      letter-spacing: -0.02em;
-    }
-
-    header p {
-      margin: 0.5rem auto 0;
-      max-width: 60ch;
-      color: #e5edff;
-      font-size: 1.05rem;
-    }
-
-    .home-button {
-      align-self: flex-start;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.6rem 1.35rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .home-button:hover {
-      background: rgba(255, 255, 255, 0.28);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 32px rgba(15, 31, 62, 0.24);
-    }
-
-    main {
-      width: min(1100px, 92%);
-      margin: 0 auto;
-      flex: 1 1 auto;
-      padding: 3rem 0 4rem;
-    }
-
-    .title-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.8rem;
-    }
-
-    .title-card {
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.97), rgba(212, 224, 255, 0.65));
-      border-radius: var(--radius);
-      padding: 1.4rem 1.9rem 4.4rem;
-      box-shadow: 0 22px 45px rgba(15, 31, 62, 0.14);
-      border: 1px solid rgba(36, 99, 235, 0.18);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .title-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(36, 99, 235, 0.22), transparent 58%);
-      opacity: 0.9;
-    }
-
-    .title-card > *:not(.card-actions) {
-      position: relative;
-      z-index: 1;
-    }
-
-    .title-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 65px rgba(15, 31, 62, 0.22);
-    }
-
-    .card-title {
-      margin: 0 0 0.6rem;
-      font-size: 1.22rem;
-      font-weight: 700;
-      color: #102b5d;
-      letter-spacing: -0.01em;
-    }
-
-    .card-company {
-      margin: 0 0 0.45rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .card-location {
-      margin: 0 0 0.75rem;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .card-category {
-      margin: 0;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: rgba(16, 43, 93, 0.86);
-    }
-
-    .card-actions {
-      position: absolute;
-      left: 1.9rem;
-      right: 1.9rem;
-      bottom: 1.4rem;
-      display: flex;
-      justify-content: center;
-      z-index: 1;
-    }
-
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      box-shadow: 0 14px 32px rgba(15, 31, 62, 0.16);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .card-link:hover {
-      background: #1a44a6;
-      transform: translateY(-2px);
-      box-shadow: 0 16px 38px rgba(15, 31, 62, 0.22);
-    }
   
-    footer {
-      padding: 1.5rem 0 2rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-  </style>
+  <link rel="stylesheet" href="../style.css" />
 </head>
-<body>
+<body class="city-page">
   <header>
-    <a class="home-button" href="../../home.html">← Back to Home</a>
+    <a class="home-button" href="../index.html">← Back to Home</a>
     <h1>Chapel Hill, NC</h1>
     <p>Fetched jobs from "Chapel Hill, NC"</p>
   </header>
   <main>
-<div class="title-grid">
+    <section class="job-controls" aria-label="Job filters">
+      <form class="job-filter" role="search">
+        <div class="filter-field">
+          <label class="sr-only" for="job-search">Search job titles</label>
+          <input type="search" id="job-search" placeholder="Search job titles..." autocomplete="off" />
+        </div>
+        <div class="filter-field">
+          <label class="sr-only" for="job-category">Filter by category</label>
+          <select id="job-category">
+            <option value="all">All categories</option>
+          </select>
+        </div>
+        <button type="reset" class="filter-reset">View all jobs</button>
+      </form>
+      <p class="job-hint">Type keywords or choose a category to filter the jobs below.</p>
+    </section>
+
+
+    <div class="title-grid">
   <div class="title-card" data-row="1">
     <div class="card-title">Travel Skilled Nursing Facility (SNF) Physical Therapist - $2,285 per week</div>
     <div class="card-company">Aequor Allied</div>
@@ -3002,42 +2834,82 @@
     <div class="card-actions"><a class="card-link" href="https://www.adzuna.com/details/5465828006?utm_medium=api&amp;utm_source=dd160bca" target="_blank" rel="noopener noreferrer">Job Posting</a></div>
   </div>
 </div>
-<script>
-(function(){
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const qraw = (params.get('q') || '').trim();
-    if (!qraw) return;
+    <p class="job-empty" role="status">No jobs match your filters. Try adjusting the search or category.</p>
+    <script>
+  (function () {
+    const cards = Array.from(document.querySelectorAll('.title-card'));
+    if (!cards.length) return;
 
-    const q = qraw.toLowerCase();
-    const terms = q.split(/\s+/).filter(Boolean);
-    const cards = document.querySelectorAll('.title-card');
-    let shown = 0;
+    const searchInput = document.querySelector('#job-search');
+    const categorySelect = document.querySelector('#job-category');
+    const form = document.querySelector('.job-filter');
+    const emptyState = document.querySelector('.job-empty');
+
+    if (!searchInput || !categorySelect || !form) return;
+
+    const categories = new Map();
 
     cards.forEach(card => {
-      const hay = card.textContent.toLowerCase();
-      const match = terms.every(t => hay.includes(t));
-      card.style.display = match ? '' : 'none';
-      if (match) shown++;
+      const label = (card.querySelector('.card-category')?.textContent || '').trim();
+      if (!label) return;
+      const key = label.toLowerCase();
+      if (!categories.has(key)) {
+        categories.set(key, label);
+      }
     });
 
-    // Small banner to show filter status and offer a "Clear" link
-    const grid = document.querySelector('.title-grid');
-    if (grid && grid.parentNode) {
-      const bar = document.createElement('div');
-      bar.setAttribute('role','status');
-      bar.style.cssText = 'margin:12px 0 16px;padding:10px 12px;border:1px solid #e6e8eb;border-radius:12px;background:#fff;line-height:1.45;';
-      // escape < > & in qraw
-      const safe = qraw.replace(/[&<>]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[s]));
-      bar.innerHTML = 'Filtering by "<strong>' + safe + '</strong>" — <strong>' + shown + '</strong> match' + (shown===1?'':'es') + '. ' +
-                      '<a href="' + location.pathname + '">Clear</a>';
-      grid.parentNode.insertBefore(bar, grid);
+    const sorted = Array.from(categories.entries()).sort((a, b) => a[1].localeCompare(b[1]));
+
+    sorted.forEach(([value, label]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      categorySelect.appendChild(option);
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const qParam = (params.get('q') || '').trim();
+    if (qParam) {
+      searchInput.value = qParam;
     }
-  } catch (e) {
-    if (window.console) console.warn('Filter error:', e);
-  }
-})();
-</script>
+    const catParam = (params.get('cat') || '').toLowerCase();
+    if (catParam && categories.has(catParam)) {
+      categorySelect.value = catParam;
+    }
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      const category = categorySelect.value;
+      let shown = 0;
+
+      cards.forEach(card => {
+        const haystack = card.textContent.toLowerCase();
+        const categoryLabel = (card.querySelector('.card-category')?.textContent || '').trim().toLowerCase();
+        const matchesQuery = !query || haystack.includes(query);
+        const matchesCategory = category === 'all' || categoryLabel === category;
+        const visible = matchesQuery && matchesCategory;
+        card.style.display = visible ? '' : 'none';
+        if (visible) shown += 1;
+      });
+
+      if (emptyState) {
+        emptyState.style.display = shown ? 'none' : 'block';
+      }
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    categorySelect.addEventListener('change', applyFilters);
+    form.addEventListener('reset', () => {
+      window.requestAnimationFrame(() => {
+        categorySelect.value = 'all';
+        applyFilters();
+      });
+    });
+
+    applyFilters();
+  })();
+  </script>
+
 
   </main>
   <footer>
